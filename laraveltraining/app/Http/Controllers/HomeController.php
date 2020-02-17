@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Todo;
+use App\User;
+
 class HomeController extends Controller
 {
     /**
@@ -23,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userId = auth()->user()->id;
+        $todos = Todo::all()->where('user_id', '=', $userId);
+        return view('home', compact('todos'));
     }
 }
