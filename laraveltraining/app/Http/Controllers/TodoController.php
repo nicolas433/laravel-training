@@ -40,10 +40,12 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $todo = new Todo();
-        var_dump($todo);
+        if($request->input('todoName')=="" || $request->input('todoDescription')==""){
+            return redirect('/home');
+        }
         $todo->name = $request->input('todoName');
         $todo->description = $request->input('todoDescription');
-        if($request->input('todoPrivacity')=='todoPublic'){
+        if($request->input('todoPrivacity')=='Public'){
             $todo->public = true;
         }else{
             $todo->public = false;
@@ -71,9 +73,10 @@ class TodoController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Todo $todo)
+    public function edit($id)
     {
-        //
+        $todo = Todo::find($id);
+        return view('pages.edittodo', compact('todo'));
     }
 
     /**
@@ -83,9 +86,25 @@ class TodoController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
+    public function update($id, Request $request)
     {
-        //
+        $todo = todo::find($id);
+        if(isset($todo)) {
+            if($request->input('todoName')=="" || $request->input('todoDescription')==""){
+                return redirect('/home');
+            }
+            $todo->name = $request->input('todoName');
+            $todo->description = $request->input('todoDescription');
+            if($request->input('todoPrivacity')=='Public'){
+                $todo->public = true;
+            }else{
+                $todo->public = false;
+            }
+            $todo->save();
+            return redirect('/home');
+        } else {
+            return redirect('/todos');
+        }
     }
 
     /**

@@ -22,3 +22,5 @@ Route::get   ('/home',             'HomeController@index'  )->name('home');
 Route::get   ('/todo/new',         'TodoController@create' )->name('todo');
 Route::post  ('/todo',             'TodoController@store'  );
 Route::delete('/todo/delete/{id}', 'TodoController@destroy');
+Route::get   ('/todo/edit/{id}',   'TodoController@edit'   );
+Route::put   ('/todo/{id}',        'TodoController@update' );

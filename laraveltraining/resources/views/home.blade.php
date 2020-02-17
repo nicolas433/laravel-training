@@ -27,13 +27,17 @@
                             <div class="description-content">
                                 {{ $todo->description }}
                             </div>
-                            <form method="POST" onsubmit="return confirm('Are you sure that you want to close this todo?')" action="/todo/delete/{{ $todo->id }}">
-                                @csrf
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button
-                                 type="submit"
-                                 class="btn btn-danger">Close todo</button>
-                            </form>
+
+                            <div class="my-buttons-block">
+                                <form method="POST" onsubmit="return confirm('Are you sure that you want to close this todo?')" action="/todo/delete/{{ $todo->id }}">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button
+                                     type="submit"
+                                     class="btn btn-danger">Close todo</button>
+                                </form>
+                                <a href="/todo/edit/{{ $todo->id }}" class="btn btn-secondary">Edit todo</a>
+                            </div>
                         </li>
                         @endforeach
                     </ul>
