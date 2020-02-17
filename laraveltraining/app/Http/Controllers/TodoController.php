@@ -18,7 +18,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return view('pages.newtodo');
+
     }
 
     /**
@@ -28,7 +28,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-
+        return view('pages.newtodo');
     }
 
     /**
@@ -94,8 +94,13 @@ class TodoController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
+    public function destroy($id)
     {
-        //
+        $todo = Todo::find($id);
+        if(isset($todo)) {
+            $todo->concluded = true;
+            $todo->save();
+        }
+        return redirect('/home');
     }
 }

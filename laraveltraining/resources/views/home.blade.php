@@ -13,14 +13,27 @@
                     </div>
                     @endif
 
-                    <a class="btn btn-primary btn-sm" href="{{ url('/create-todo') }}">New todo.</a>
+                    <a class="btn btn-primary btn-sm" href="/todo/new">New todo.</a>
 
-                    <ul>
+                    <ul class="list-group">
                         @foreach($todos as $todo)
-                        <li>
-                            {{ $todo->name }}
-                            <br>
-                            {{ $todo->description }}
+                        <li class="list-group-item">
+                            @if ($todo->concluded == false)
+                                <div class="active-status-dot"></div>
+                            @else
+                                <div class="inactive-status-dot"></div>
+                            @endif
+                            <strong>{{ $todo->name }}</strong>
+                            <div class="description-content">
+                                {{ $todo->description }}
+                            </div>
+                            <form method="POST" onsubmit="return confirm('Are you sure that you want to close this todo?')" action="/todo/delete/{{ $todo->id }}">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button
+                                 type="submit"
+                                 class="btn btn-danger">Close todo</button>
+                            </form>
                         </li>
                         @endforeach
                     </ul>

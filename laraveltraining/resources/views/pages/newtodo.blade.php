@@ -12,7 +12,7 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <form method="POST" action="/new-todo">
+                    <form method="POST" action="/todo">
                         @csrf
                         <div class="form-group row">
                             <label for="todoName" class="col-md-4 col-form-label text-md-right">Name</label>
