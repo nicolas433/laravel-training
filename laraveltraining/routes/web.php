@@ -17,10 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get   ('/home',             'HomeController@index'  )->name('home');
+Route::get   ('/home',              'HomeController@index'  )->name('home');
 
-Route::get   ('/todo/new',         'TodoController@create' )->name('todo');
-Route::post  ('/todo',             'TodoController@store'  );
-Route::delete('/todo/delete/{id}', 'TodoController@destroy');
-Route::get   ('/todo/edit/{id}',   'TodoController@edit'   );
-Route::put   ('/todo/{id}',        'TodoController@update' );
+Route::get   ('/user/edit/{id}',    'UserController@edit'   )->name('todo');
+Route::get   ('/user/{id}',         'UserController@update' )->name('todo');
+
+Route::get   ('/todo/new',          'TodoController@create' )->name('todo');
+Route::post  ('/todo',              'TodoController@store'  );
+Route::delete('/todo/delete/{id}',  'TodoController@destroy');
+Route::get   ('/todo/edit/{id}',    'TodoController@edit'   );
+Route::put   ('/todo/{id}',         'TodoController@update' );

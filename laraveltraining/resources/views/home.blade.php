@@ -13,17 +13,14 @@
                     </div>
                     @endif
 
-                    <a class="btn btn-primary btn-sm" href="/todo/new">New todo.</a>
+                    <a class="btn btn-primary btn-sm my-btn-new" href="/todo/new">New todo.</a>
 
                     <ul class="list-group">
                         @foreach($todos as $todo)
                         <li class="list-group-item">
                             @if ($todo->concluded == false)
                                 <div class="active-status-dot"></div>
-                            @else
-                                <div class="inactive-status-dot"></div>
-                            @endif
-                            <strong>{{ $todo->name }}</strong>
+                                <strong>{{ $todo->name }}</strong>
                             <div class="description-content">
                                 {{ $todo->description }}
                             </div>
@@ -38,6 +35,25 @@
                                 </form>
                                 <a href="/todo/edit/{{ $todo->id }}" class="btn btn-secondary">Edit todo</a>
                             </div>
+                            @else
+                                <div class="inactive-status-dot"></div>
+                                <strong>{{ $todo->name }}</strong>
+                            <div class="description-content">
+                                {{ $todo->description }}
+                            </div>
+
+                            <div class="my-buttons-block">
+                                <form method="POST" onsubmit="return confirm('Are you sure that you want to close this todo?')" action="/todo/delete/{{ $todo->id }}">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button
+                                     type="submit"
+                                     class="btn btn-danger">Close todo</button>
+                                </form>
+                                <a href="/todo/edit/{{ $todo->id }}" class="btn btn-secondary">Edit todo</a>
+                            </div>
+                            @endif
+
                         </li>
                         @endforeach
                     </ul>

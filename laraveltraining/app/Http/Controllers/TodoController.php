@@ -28,7 +28,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        return view('pages.newtodo');
+        return view('pages.todo.newtodo');
     }
 
     /**
@@ -76,7 +76,7 @@ class TodoController extends Controller
     public function edit($id)
     {
         $todo = Todo::find($id);
-        return view('pages.edittodo', compact('todo'));
+        return view('pages.todo.edittodo', compact('todo'));
     }
 
     /**
